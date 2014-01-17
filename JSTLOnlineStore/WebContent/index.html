@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Online Store</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+ <link rel="stylesheet" href="Styles/main.css" type="text/css"/>
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+
+</head>
+<body>
+ <div class="container">
+	
+      <form class="form-signin" role="form" method="POST">
+      	<div class="alert alert-error" style="display:none">
+                <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+        </div>
+        <h2 class="form-signin-heading">Log in to store</h2>
+        <input type="text" class="form-control" placeholder="username" name="userName" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script>
+
+$('form').on('submit', function(event) {
+    var $form = $(this);
+    $.ajax({
+        type: $form.attr('method'),
+        url: 'Authentication',
+        data: $form.serialize(),
+
+        success: function(data, status) {
+        	if (data.Login == 'fail') {
+		    	$(".alert").show();
+		    }
+        	else {
+        		$form = $(".form-signin").clone();
+        		$form.attr('action','Login');
+        		$form.submit();
+        		
+        	};
+        }
+    });
+
+    event.preventDefault();
+});
+
+
+
+</script>
+</body>
+</html>

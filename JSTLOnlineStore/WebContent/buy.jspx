@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cart="urn:jsptld:/WEB-INF/taglib.tld">
+    <jsp:directive.page contentType="text/html;charset=ISO-8859-1"  pageEncoding="ISO-8859-1" session="false"/>
+    <jsp:output omit-xml-declaration="yes" />
+
+<html>
+<head>
+<title>Purchase Items</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="Styles/main.css" type="text/css"></link>
+
+</head>
+<body>
+<jsp:useBean id="purchase" scope="request" class="beans.PurchaseBean">
+<jsp:setProperty name="purchase" property="*"/>
+</jsp:useBean>
+<c:set var='Items' value="${purchase.items}"/>
+ 
+  <div class="container">
+        <table class="table table-hover">
+        <tr>
+				<th>Item</th>
+				<th>Price</th>
+		</tr>
+<c:forEach items="${Items}" var="item" >
+	 <div id="Item"><cart:item itemName="${item.name}"></cart:item></div>
+</c:forEach>
+</table>
+</div>
+  <hr/>
+ <div class="container"><label class="lead">Total: </label> <label class="lead"><jsp:getProperty name="purchase" property="total"/></label></div>
+ 
+  
+</body>
+</html>
+</jsp:root>
